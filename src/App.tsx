@@ -1,26 +1,21 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React from "react";
+import { StyledEngineProvider, ThemeProvider } from "@mui/material/styles";
+import { theme } from "./services/theme";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
+import Home from "./pages/home";
+import Auth from "./pages/auth";
 
-function App() {
+export default function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <ThemeProvider theme={theme}>
+      <StyledEngineProvider injectFirst>
+        <BrowserRouter>
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="auth" element={<Auth />} />
+          </Routes>
+        </BrowserRouter>
+      </StyledEngineProvider>
+    </ThemeProvider>
   );
 }
-
-export default App;
